@@ -5,7 +5,7 @@ import Footer from '../components/Footer/Footer';
 const HousesPage = () => {
     return (
         <div className="wrapper">
-            {/* Верхнее меню */}
+            
             <Header />
 
             <div className="character__body">
