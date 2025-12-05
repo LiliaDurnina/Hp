@@ -4,7 +4,7 @@ import logo from '../../assets/images/logo.svg';
 
 const Header: React.FC = () => {
     const [open, setOpen] = useState(false);
-    const location = useLocation(); // текущий путь
+    const location = useLocation(); 
 
     const toggle = (e?: React.MouseEvent) => {
         if (e) e.preventDefault();
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
     const isActive = (path: string) => location.pathname === path;
 
-    // Функция для скролла к футеру (только для About us)
+    
     const scrollToFooter = () => {
         const footerElement = document.getElementById('contacts');
         if (footerElement) {
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
                 block: 'start'
             });
         }
-        closeMenu(); // Закрываем меню после клика
+        closeMenu(); 
     };
 
     return (
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
                                 <li className="header__nav-item">
                                     
                                     <a
-                                        className="header__nav-link active" // Добавили active
+                                        className="header__nav-link active" 
                                         href="#contacts"
                                         onClick={(e) => {
                                             e.preventDefault();
