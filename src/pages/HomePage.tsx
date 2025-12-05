@@ -20,7 +20,7 @@ const HomePage = () => {
                                         <Link className="header__content-btn button button-empty" to="/characters">
                                                 Characters
                                         </Link>
-                                        <Link className="header__content-btn button button-empty" to="/filmography">
+                                        <Link className="header__content-btn button button" to="/filmography">
                                                 Filmography
                                         </Link>
                                         
