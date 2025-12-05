@@ -19,7 +19,7 @@ export const housesApi = {
     async getStudentsByHouse(house: string): Promise<CharacterDetails[]> {
         console.log(`Пытаемся загрузить студентов факультета: ${house}`);
       
-        // Количество попыток
+        // тут кололичество попыток
         const maxRetries = 3;
         
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -29,27 +29,27 @@ export const housesApi = {
                 const apiUrl = `${this.url}/houses/${house.toLowerCase()}`;
                 const proxyUrl = 'https://api.allorigins.win/raw?url=';
                 
-                // Добавляем небольшую задержку между попытками, кроме первой
+                
                 if (attempt > 1) {
-                    await new Promise(resolve => setTimeout(resolve, 1000 * attempt)); // Экспоненциальная задержка
+                    await new Promise(resolve => setTimeout(resolve, 1000 * attempt)); 
                 }
                 
                 const response = await fetch(proxyUrl + apiUrl);
           
                 if (!response.ok) {
                     console.warn(`Попытка ${attempt}: HTTP ошибка ${response.status} для ${house}`);
-                    continue; // Пробуем еще раз
+                    continue; 
                 }
           
                 const houseData = await response.json();
                 
-                // Проверяем, что получили корректные данные
+                
                 if (!houseData) {
                     console.warn(`Попытка ${attempt}: Пустой ответ для ${house}`);
                     continue;
                 }
                 
-                // Убеждаемся, что houseData - массив
+                
                 const dataArray = Array.isArray(houseData) ? houseData : [];
                 
                 const mappedMembers: CharacterDetails[] = dataArray
@@ -61,19 +61,19 @@ export const housesApi = {
                         hogwartsStaff: Boolean(member.hogwartsStaff || member.staff || false),
                     }));
                 
-                // Проверяем, что получили хотя бы одного студента
+               
                 if (mappedMembers.length > 0) {
                     console.log(`✓ Успешно загружено ${mappedMembers.length} студентов факультета ${house} (попытка ${attempt})`);
                     return mappedMembers;
                 } else {
                     console.warn(`Попытка ${attempt}: Нет данных о студентах для ${house}`);
-                    // Пробуем еще раз, может быть временная проблема
+                    
                 }
                 
             } catch (error) {
                 console.error(`Попытка ${attempt} для ${house} не удалась:`, error);
                 
-                // Если это последняя попытка - бросаем ошибку дальше
+                
                 if (attempt === maxRetries) {
                     console.error(`Все ${maxRetries} попытки для ${house} не удались`);
                     return [];
