@@ -13,7 +13,7 @@ interface Props {
   image: string;
   description: string;
   stats?: HouseStats;
-  index: number; // можно оставить, даже если не используется
+  index: number; 
 }
 
 const HouseSection: React.FC<Props> = ({ house, image, description, stats }) => {
